@@ -89,8 +89,8 @@ class NearestNeighborClassifier:
             data points will be size (k, D)
             labels will be size (k,)
         """
-        #x = self.input_normalization(x)
-        idx = torch.topk((torch.norm(x - self.data, dim=-1)), k=k, largest=False, sorted=True).indices
+        x = self.input_normalization(x)
+        idx = torch.topk((torch.norm(x - self.data_normalized, dim=-1)), k=k, largest=False, sorted=True).indices
         return (self.data[idx], self.label[idx])
 
     def knn_regression(self, x: torch.Tensor, k: int) -> torch.Tensor:
